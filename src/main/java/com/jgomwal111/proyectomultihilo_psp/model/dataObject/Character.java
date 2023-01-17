@@ -2,14 +2,24 @@ package com.jgomwal111.proyectomultihilo_psp.model.dataObject;
 
 import com.jgomwal111.proyectomultihilo_psp.log.Log;
 import com.jgomwal111.proyectomultihilo_psp.utils.chronometer.SynchronizedMethods;
+import javafx.application.Platform;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "character")
-public class Character implements Runnable {
+public class Character implements Runnable, Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Attributes of this
+     */
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "NAME")
     private String name;
@@ -21,13 +31,23 @@ public class Character implements Runnable {
     private int defense;
     @Column(name = "POSITION")
     private int position;
-    @JoinColumn(name = "ID_USER")
     @ManyToOne(fetch = FetchType.LAZY)
-    private int owner;
+    @JoinColumn(name = "id_user", referencedColumnName = "ID")
+    private User owner;
+    @Transient
     private SynchronizedMethods wait = new SynchronizedMethods();
 
-
+    /**
+     * Constructors
+     */
     public Character() {
+    }
+    public Character(String name, int health, int damage, int defense, int position) {
+        this.name = name;
+        this.health = health;
+        this.attack = damage;
+        this.defense = defense;
+        this.position = position;
     }
     public Character(String name, int health, int damage, int defense, int position, SynchronizedMethods wait) {
         this.name = name;
@@ -38,6 +58,10 @@ public class Character implements Runnable {
         this.wait.setWait(false);
     }
 
+    /**
+     * Getters and Setters
+     * @return
+     */
     public int getId() {
         return id;
     }
@@ -80,7 +104,17 @@ public class Character implements Runnable {
     public void setWait(SynchronizedMethods wait) {
         this.wait = wait;
     }
+    public User getOwner() {
+        return owner;
+    }
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
 
+    /**
+     * ToString of this
+     * @return
+     */
     @Override
     public String toString() {
         return "Player{" +
@@ -93,6 +127,11 @@ public class Character implements Runnable {
                 '}';
     }
 
+    /**
+     * Equals and HashCode
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -105,16 +144,24 @@ public class Character implements Runnable {
         return Objects.hash(getId());
     }
 
+    /**
+     * Method that permit to start a Thread when it calls start()
+     */
     public void run(){
-        if(this.position>=0){
-            while(this.position<=position++){
-                try {
-                    Thread.sleep(1);
-                    this.position++;
-                } catch (InterruptedException e) {
-                    Log.warningLogging("Error at move");
+        Platform.runLater(() -> {
+            boolean walking = false;
+            while(!walking){
+                int randomSteps = (int)Math.floor(Math.random() * 999);
+                int rSCont = 0;
+                while(this.position<=position++){
+                    try {
+                        Thread.sleep(1000);
+                        this.position++;
+                    } catch (InterruptedException e) {
+                        Log.warningLogging("Error at move");
+                    }
                 }
             }
-        }
+        });
     }
 }

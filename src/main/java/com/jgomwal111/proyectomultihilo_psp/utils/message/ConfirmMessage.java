@@ -7,12 +7,12 @@ import javafx.stage.StageStyle;
 public class ConfirmMessage extends Message {
 
     /**
-     * Atributo de clase
+     * Attributes of this
      */
     private ButtonType bt;
 
     /**
-     * Constructor con parametros
+     * Constructors
      * @param message Mensaje a mostrar
      */
     public ConfirmMessage(String message) {
@@ -20,15 +20,15 @@ public class ConfirmMessage extends Message {
     }
 
     /**
-     * Obtiene el contenido del botón
-     * @return Valor dependiendo de si el usuario pulsó el boton cancela o aceptar
+     * It obtains the button response
+     * @return Value of the button that the User pushes
      */
     public ButtonType getBt() {
         return bt;
     }
 
     /**
-     * Muestra una pantalla de alerta de tipo Confirmation
+     * Method that emits a Confirmation message
      */
     @Override
     public void showMessage() {

@@ -3,27 +3,23 @@ package com.jgomwal111.proyectomultihilo_psp.utils.message;
 public abstract class Message {
 
     /**
-     * Atributo de clase
+     * Attributes of this
      */
     protected String message;
 
     /**
-     * Constructor con parametros
-     * @param message Mensaje a mostrar
+     * Constructors
+     * @param message Message to show
      */
     public Message(String message) {
         this.message = message;
     }
-
-    /**
-     * Constructor por defecto
-     */
     public Message() {
-        this("Contenido no disponible.");
+
     }
 
     /**
-     * Metodo abstrato en el que se mostrará un mensaje
+     * Abstract method that shows the message
      */
     abstract public void showMessage();
 }

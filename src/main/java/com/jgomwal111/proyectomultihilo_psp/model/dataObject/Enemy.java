@@ -4,21 +4,28 @@ import java.util.Objects;
 
 public class Enemy {
 
+    /**
+     * Attributes of this
+     */
     private int id;
     private int health;
     private int attack;
     private int defense;
 
+    /**
+     * Constructors
+     */
     public Enemy() {
     }
-
-    public Enemy(int id, int health, int damage, int defense) {
-        this.id = id;
+    public Enemy(int health, int attack, int defense) {
         this.health = health;
-        this.attack = damage;
+        this.attack = attack;
         this.defense = defense;
     }
 
+    /**
+     * Getters and Setters
+     */
     public int getId() {
         return id;
     }
@@ -44,6 +51,10 @@ public class Enemy {
         this.defense = defense;
     }
 
+    /**
+     * ToString of this
+     * @return
+     */
     @Override
     public String toString() {
         return "Enemy{" +
@@ -53,6 +64,11 @@ public class Enemy {
                 '}';
     }
 
+    /**
+     * Equals and HashCode
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

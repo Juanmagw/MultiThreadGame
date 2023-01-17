@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jgomwal111.proyectomultihilo_psp.controller.GameController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jgomwal111.proyectomultihilo_psp.controller.GameController">
+   <children>
+      <TextField fx:id="tfChronometer" editable="false" layoutX="493.0" layoutY="32.0" prefHeight="25.0" prefWidth="59.0" promptText="00:00:00" />
+      <Button fx:id="btnAddPlayer" layoutX="54.0" layoutY="332.0" mnemonicParsing="false" text="Add Player">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSurrender" layoutX="477.0" layoutY="332.0" mnemonicParsing="false" text="Surrrender">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <Label layoutX="76.0" layoutY="44.0" text="Position:: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="19.0" layoutY="74.0" prefHeight="245.0" prefWidth="455.0" style="-fx-background-color: rgb(200,200,200);" />
+      <VBox fx:id="vBCage" alignment="CENTER" layoutX="486.0" layoutY="74.0" prefHeight="245.0" prefWidth="100.0">
+         <children>
+            <Button fx:id="btnAttack" mnemonicParsing="false" onAction="#attack" text="Attack">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnDefense" mnemonicParsing="false" onAction="#defend" text="Defense">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </Button>
+            <Button fx:id="btnSurrender2" mnemonicParsing="false" onAction="#surrend" text="Surrender">
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </VBox>
+      <TextField fx:id="tfPosition" editable="false" layoutX="158.0" layoutY="47.0" prefHeight="25.0" prefWidth="59.0" promptText="0" />
+   </children>
 </AnchorPane>

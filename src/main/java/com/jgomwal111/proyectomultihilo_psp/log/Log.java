@@ -26,8 +26,8 @@ public class Log {
     }
 
     /**
-     * Genera el log con nivel Warning y muestra la información
-     * @param message Mensaje a mostrar
+     * It generates a Warning Log and shows the information
+     * @param message Message to show
      */
     public static void warningLogging(String message) {
         saveLog();
@@ -35,6 +35,9 @@ public class Log {
         logger.log(Level.WARNING,message);
     }
 
+    /**
+     * It read log properties and then it use log configuration
+     */
     private static void saveLog() {
         try {
             InputStream configFile= Log.class.getResourceAsStream("logging.properties");

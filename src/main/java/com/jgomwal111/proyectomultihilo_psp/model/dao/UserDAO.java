@@ -1,23 +1,25 @@
 package com.jgomwal111.proyectomultihilo_psp.model.dao;
 
+import com.jgomwal111.proyectomultihilo_psp.connection.DBConnection;
 import com.jgomwal111.proyectomultihilo_psp.model.dataObject.User;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.Query;
 
 public class UserDAO extends User{
 
-    private static EntityManagerFactory emf;
+    /**
+     * Attributes of this
+     */
     private static EntityManager manager;
+    private User u;
 
     /**
-     * Mátodo que crea un User en la base de datos
-     * @return true o false si lo crea o no
+     * Method that creates an User on the DataBase
+     * @return true it creates the User o false it doesn't
      */
     public static boolean insert(User u) {
-        emf = Persistence.createEntityManagerFactory("mysql");
-        manager = emf.createEntityManager();
+        manager = DBConnection.getConnect().createEntityManager();
         boolean result=false;
         manager.getTransaction().begin();
         manager.persist(u);
@@ -28,12 +30,15 @@ public class UserDAO extends User{
     }
 
     /**
-     * Método que busca un User por su nombre en la base de datos
-     * @param name Nombre del objeto a buscar
-     * @return el User o null si lo ha encontrado o no
+     * Method that searchs an User with his name on the DataBase
+     * @param name Name of User who is searching
+     * @return User that is searching or null if the User is not find
      */
     public static User get(String name) {
-        User aux = manager.find(User.class, name);
+        manager = DBConnection.getConnect().createEntityManager();
+        User aux = new User();
+        aux.setName(name);
+        Query q = manager.createNativeQuery("Select * FROM user WHERE name="+name);
         manager.close();
         return aux;
     }

@@ -6,15 +6,15 @@ import javafx.stage.StageStyle;
 public class ErrorMessage extends Message {
 
     /**
-     * Constructor con parametros
-     * @param message Mensaje a mostrar
+     * Constructors
+     * @param message Message to show
      */
     public ErrorMessage(String message) {
         super(message);
     }
 
     /**
-     * Muestra una pantalla de alerta de tipo Error
+     * Method that emits an Error message
      */
     @Override
     public void showMessage() {

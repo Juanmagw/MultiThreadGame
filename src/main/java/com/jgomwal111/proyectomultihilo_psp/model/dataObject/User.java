@@ -1,40 +1,43 @@
 package com.jgomwal111.proyectomultihilo_psp.model.dataObject;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Table(name = "USER")
-public class User {
+public class User implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     /**
-     * Atributos de user
+     * Attributes of this
      */
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "NAME")
     private String name;
     @Column(name = "PASSWORD")
     private String password;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Character> characters;
 
     /**
-     * Constructores de User por defecto y fullBuild
+     * Constructors
      */
     public User(){
     }
-    public User(String name, String password) {
+    public User(int id, String name, String password) {
+        this.id = id;
         this.name = name;
         this.password = password;
     }
 
     /**
-     * Getters & Setters de User
-     * @return
+     * Getters and Setters
      */
     public int getId() {
         return id;
@@ -54,10 +57,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+    public List<Character> getCharacters() {
+        return characters;
+    }
+    public void setCharacters(List<Character> characters) {
+        this.characters = characters;
+    }
 
     /**
-     * Método toString de User
-     * @return
+     * ToString of this
      */
     @Override
     public String toString() {
@@ -68,9 +76,7 @@ public class User {
     }
 
     /**
-     * Método equals & hashCode de User
-     * @param o
-     * @return
+     * Equals and HashCode
      */
     @Override
     public boolean equals(Object o) {
